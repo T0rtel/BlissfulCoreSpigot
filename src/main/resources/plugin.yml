@@ -1,0 +1,9 @@
+name: BlissfulCoreSpigot
+version: '${project.version}'
+main: tortel.blissfulcorespigot.Main
+api-version: '1.20'
+
+commands:
+  emojis:
+    aliases:
+      - e
