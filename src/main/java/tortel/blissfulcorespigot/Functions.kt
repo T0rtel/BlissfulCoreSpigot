@@ -180,6 +180,7 @@ object Functions {
 
     fun returnTitleString() :String {
         val config = Main.instance?.config!!
+        /*
         val titlemap = listOf(
                 mapOf("text" to "~ ", "color" to "#ffff00"),
                 mapOf("text" to "B", "color" to "#fdf30b"),
@@ -206,12 +207,14 @@ object Functions {
                 mapOf("text" to "2 ", "color" to "#d40bf3"),
                 mapOf("text" to "~\n", "color" to "#d300ff")
         )
+
+         */
         var newTitle : String = ""
 
 
         //val title = Main.instance?.config!!.getConfigurationSection("title")!!
         config.getMapList("title").forEach {
-            Bukkit.broadcastMessage("${it.keys} ${it.entries} ${it.values}")
+            //Bukkit.broadcastMessage("${it.keys} ${it.entries} ${it.values}")
 
             val hexColor = getColorCodeFromString(it.values.last() as String)
             newTitle = "$newTitle${ChatColor.of(hexColor)}${it.values.first()}"
