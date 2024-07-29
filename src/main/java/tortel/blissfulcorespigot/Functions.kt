@@ -305,6 +305,7 @@ object Functions {
 
         fun returnMSGwithUniCode(event : AsyncPlayerChatEvent): Any {
             event.isCancelled = true
+
             val config = Main.instance?.config!!
             val plr = event.player
             val stringMsg = event.message
