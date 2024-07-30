@@ -19,7 +19,7 @@ object Functions {
     data class Points(val points: Int, val name: String)
 
 
-    val teamnames = mutableMapOf<String, String>(
+    var teamnames = mutableMapOf<String, String>(
             ".ruby" to "Ruby",
             ".amber" to "Amber",
             ".topaz" to "Topaz",
@@ -30,7 +30,7 @@ object Functions {
             ".amethyst" to "Amethyst"
     )
 
-    val teamcolors = mutableMapOf<ChatColor, String>(
+    var teamcolors = mutableMapOf<ChatColor, String>(
         ChatColor.RED to "Ruby",
         ChatColor.GOLD to "Amber",
         ChatColor.YELLOW to "Topaz",
@@ -47,6 +47,62 @@ object Functions {
     var currentplacement = 0
 
     var endmsg = listOf<String>()
+
+    fun detectTeamNames(){
+        val config = Main.instance!!.config
+
+        if (config.getInt("teamnames") == 1){
+
+           teamnames = mutableMapOf<String, String>(
+                ".ruby" to "Garnet",
+                ".amber" to "Sunstone",
+                ".topaz" to "Citrine",
+                ".jade" to "Peridot",
+                ".aquamarine" to "Pearl",
+                ".diamond" to "Opal",
+                ".sapphire" to "Azurite",
+                ".amethyst" to "Tanzanite"
+            )
+
+           teamcolors = mutableMapOf<ChatColor, String>(
+                ChatColor.RED to "Garnet",
+                ChatColor.GOLD to "Sunstone",
+                ChatColor.YELLOW to "Citrine",
+                ChatColor.GREEN to "Peridot",
+                ChatColor.LIGHT_PURPLE to "Pearl",
+                ChatColor.AQUA to "Opal",
+                ChatColor.BLUE to "Azurite",
+                ChatColor.DARK_PURPLE to "Tanzanite"
+            )
+
+        }
+
+        if (config.getInt("teamnames") == 2){
+
+            teamnames = mutableMapOf<String, String>(
+                ".ruby" to "Ruby",
+                ".amber" to "Amber",
+                ".topaz" to "Topaz",
+                ".jade" to "Jade",
+                ".aquamarine" to "Aquamarine",
+                ".diamond" to "Diamond",
+                ".sapphire" to "Sapphire",
+                ".amethyst" to "Amethyst"
+            )
+
+            teamcolors =  mutableMapOf<ChatColor, String>(
+                ChatColor.RED to "Ruby",
+                ChatColor.GOLD to "Amber",
+                ChatColor.YELLOW to "Topaz",
+                ChatColor.GREEN to "Jade",
+                ChatColor.DARK_AQUA to "Aquamarine",
+                ChatColor.AQUA to "Diamond",
+                ChatColor.BLUE to "Sapphire",
+                ChatColor.LIGHT_PURPLE to "Amethyst"
+            )
+
+        }
+    }
 
     fun GetScores() { // gets all entities and adds their values to the list
 
@@ -309,6 +365,8 @@ object Functions {
             val config = Main.instance?.config!!
             val plr = event.player
             val stringMsg = event.message
+
+            println("[CHAT]: ${plr.name}: ${stringMsg}")
 
             val plrComponent  = setupPlayerComponent(plr)
             val newMsg = TextComponent()

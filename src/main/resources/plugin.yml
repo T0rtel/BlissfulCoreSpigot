@@ -7,3 +7,5 @@ commands:
   emojis:
     aliases:
       - e
+  toggleteamnames:
+    description: toggles team names from community to official and vice versa

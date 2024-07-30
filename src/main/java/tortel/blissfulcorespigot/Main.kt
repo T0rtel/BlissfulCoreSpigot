@@ -4,6 +4,7 @@ import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
 import tortel.blissfulcorespigot.Commands.ChangeTeamCommand
+import tortel.blissfulcorespigot.Commands.ChangeTeamNames
 import tortel.blissfulcorespigot.Commands.EmojisCommand
 import tortel.blissfulcorespigot.Events.OnPlayerChat
 import java.io.File
@@ -29,6 +30,7 @@ class Main : JavaPlugin() {
     }
     override fun onDisable(){
         setupConfigsOnDisable()
+        instance!!.saveDefaultConfig()
 
         logger.info("Disabled Plugin.")
     }
@@ -50,6 +52,7 @@ class Main : JavaPlugin() {
     private fun registerCommands(){
         //getCommand("changeofflineplayerteam")?.setExecutor(ChangeTeamCommand())
         getCommand("emojis")?.setExecutor(EmojisCommand())
+        getCommand("toggleteamnames")?.setExecutor(ChangeTeamNames())
     }
 
 
