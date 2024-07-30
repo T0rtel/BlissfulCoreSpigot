@@ -9,6 +9,7 @@ import tortel.blissfulcorespigot.Main
 
 class ChangeTeamNames : CommandExecutor {
     override fun onCommand(sender: CommandSender, cmd: Command, p2: String, arrays: Array<out String>): Boolean {
+        if (!sender.isOp) return false
         val config = Main.instance!!.config
         println("${config.getInt("teamnames")}")
         /*
