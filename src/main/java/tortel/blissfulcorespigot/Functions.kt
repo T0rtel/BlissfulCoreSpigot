@@ -41,6 +41,17 @@ object Functions {
         ChatColor.LIGHT_PURPLE to "Amethyst"
     )
 
+    val teamsequivelant = mutableMapOf<String, String>(
+        "Garnet" to "Ruby",
+        "Sunstone" to "Amber",
+        "Citrine" to "Topaz",
+        "Peridot" to "Jade",
+        "Pearl" to "Aquamarine",
+        "Opal" to "Diamond",
+        "Azurite" to "Sapphire",
+        "Tanzanite" to "Amethyst"
+    )
+
 
     var records = listOf<Points>()
 
@@ -51,7 +62,7 @@ object Functions {
     fun detectTeamNames(){
         val config = Main.instance!!.config
 
-        if (config.getInt("teamnames") == 1){
+        if (config.getInt("teamnames") == 0){
 
            teamnames = mutableMapOf<String, String>(
                 ".ruby" to "Garnet",
@@ -77,7 +88,7 @@ object Functions {
 
         }
 
-        if (config.getInt("teamnames") == 2){
+        if (config.getInt("teamnames") == 1){
 
             teamnames = mutableMapOf<String, String>(
                 ".ruby" to "Ruby",
@@ -165,7 +176,7 @@ object Functions {
         return ChatColor.of(HexString)
     }
 
-    fun plrisinteam(plr : Player) : Boolean{
+    fun plrisinateam(plr : Player) : Boolean{
         for (team in Bukkit.getScoreboardManager()?.mainScoreboard?.teams!!){
             if (team.hasPlayer(plr)) {
                 return true
@@ -198,8 +209,8 @@ object Functions {
         var returnedteamString = ""
         var index = 0
         for (plr in Bukkit.getOnlinePlayers()) {
-            if (!plrisinteam(plr)) return ""
-            if (getteam(plr)?.name == teamname) {
+            if (!plrisinateam(plr)) return "" // if player isnt in a team
+            if (getteam(plr)?.name == teamname || getteam(plr)?.name == teamsequivelant[teamname]) {
                 index += 1
                 if (index < 4) {
                     returnedteamString += "${returnisonlineColor(plr, teamname)}[${plr.name}]     "
@@ -277,20 +288,6 @@ object Functions {
 
         }
         return newTitle
-        /*
-        for (data in titlemap) {
-            val text = data["text"]
-            val color = data["color"]
-            //Bukkit.broadcastMessage("${data} ${title}")
-
-
-            // Do something with text and color
-            val hexColor = getColorCodeFromString(color as String)
-            newTitle = "$newTitle${ChatColor.of(hexColor)}$text"
-        }
-        return newTitle
-
-         */
     }
 
     val finalTitle = returnTitleString()
@@ -366,7 +363,7 @@ object Functions {
             val plr = event.player
             val stringMsg = event.message
 
-            println("[CHAT]: ${plr.name}: ${stringMsg}")
+            println("${plr.name}: ${stringMsg}")
 
             val plrComponent  = setupPlayerComponent(plr)
             val newMsg = TextComponent()

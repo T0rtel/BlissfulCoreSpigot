@@ -30,12 +30,12 @@ class Main : JavaPlugin() {
     }
     override fun onDisable(){
         setupConfigsOnDisable()
-        instance!!.saveDefaultConfig()
 
         logger.info("Disabled Plugin.")
     }
 
     private fun setupTab(){
+        Functions.detectTeamNames()
         val bukkitRunnable = object: BukkitRunnable() { // runs every second
             override fun run() {
                 Functions.GetScores()

@@ -10,22 +10,37 @@ import tortel.blissfulcorespigot.Main
 class ChangeTeamNames : CommandExecutor {
     override fun onCommand(sender: CommandSender, cmd: Command, p2: String, arrays: Array<out String>): Boolean {
         val config = Main.instance!!.config
+        println("${config.getInt("teamnames")}")
+        /*
+        if (config.getInt("teamnames") == 0){
+            config.set("teamnames", 2)
+            config.save("${Main.dataFolderDir}\\config.yml")
+            //Main.instance!!.saveDefaultConfig()
+        }
+
+         */
+
+        if (config.getInt("teamnames") == 0){
+            println("its 0")
+            config.set("teamnames", 1)
+            config.save("${Main.dataFolderDir}\\config.yml")
+
+            Functions.detectTeamNames()
+
+            return false
+        }
 
         if (config.getInt("teamnames") == 1){
-            config.set("teamnames", 2)
+            println("its 1")
+            config.set("teamnames", 0)
+            config.save("${Main.dataFolderDir}\\config.yml")
 
             Functions.detectTeamNames()
 
-            Main.instance!!.saveDefaultConfig()
+            return false
         }
 
-        if (config.getInt("teamnames") == 2){
-            config.set("teamnames", 1)
-
-            Functions.detectTeamNames()
-
-            Main.instance!!.saveDefaultConfig()
-        }
+        println("${config.getInt("teamnames")}")
 
 
         return false
